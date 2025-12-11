@@ -3,6 +3,9 @@ import subprocess
 import sys
 import os
 
+API_KEY = "qggkwn4svoocy13z"
+API_SECRET = "hd97qxe2h5lp07f4gpjnp54iyh2ncyid"
+
 st.title("Zerodha Access Token Generator")
 
 st.markdown("### Step 1: Generate login URL and instructions")
