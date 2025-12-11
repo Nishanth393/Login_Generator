@@ -1,8 +1,8 @@
 # token_generator.py
 from kiteconnect import KiteConnect
 
-API_KEY = "..."   # move to env vars later
-API_SECRET = "..."
+API_KEY = "qggkwn4svoocy13z"
+API_SECRET = "hd97qxe2h5lp07f4gpjnp54iyh2ncyid"
 
 def get_daily_access_token():
     kite = KiteConnect(api_key=API_KEY)
