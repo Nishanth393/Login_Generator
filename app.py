@@ -33,6 +33,6 @@ if st.button("Generate access token"):
             with open("access_token.txt", "w") as f:
                 f.write(access_token)
             st.success("Access Token generated and saved to access_token.txt")
-            st.write(f"Token (first 10 chars): {access_token[:10]}...")
+            st.write(f"Token: {access_token}")
         except Exception as e:
             st.error(f"Error generating session: {e}")
