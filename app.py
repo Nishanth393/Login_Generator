@@ -23,8 +23,7 @@ st.markdown("### Web-native version (no console `input()`)")
 
 st.write("1. Click the button to get the login URL here itself.")
 if st.button("Get login URL"):
-    from kiteconnect import KiteConnect
-    API_KEY = os.getenv("ZERODHA_API_KEY")  # recommended
+    from kiteconnect import KiteConnect  # recommended
     kite = KiteConnect(api_key=API_KEY)
     login_url = kite.login_url()
     st.success("Login URL generated:")
@@ -38,8 +37,6 @@ if st.button("Generate access token"):
         st.warning("Please enter a request_token first.")
     else:
         from kiteconnect import KiteConnect
-        API_KEY = os.getenv("ZERODHA_API_KEY")
-        API_SECRET = os.getenv("ZERODHA_API_SECRET")
         kite = KiteConnect(api_key=API_KEY)
         try:
             data = kite.generate_session(request_token, api_secret=API_SECRET)
