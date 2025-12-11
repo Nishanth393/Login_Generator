@@ -1,0 +1,52 @@
+import streamlit as st
+import subprocess
+import sys
+import os
+
+st.title("Zerodha Access Token Generator")
+
+st.markdown("### Step 1: Generate login URL and instructions")
+st.write("Click the button below to run the original script and show the login URL in the terminal output.")
+
+if st.button("Run token generator (console mode)"):
+    # Run the original script as a subprocess
+    result = subprocess.run(
+        [sys.executable, "token_generator.py"],
+        capture_output=True,
+        text=True
+    )
+    st.code(result.stdout or "No output")
+    if result.stderr:
+        st.error(result.stderr)
+
+st.markdown("### Web-native version (no console `input()`)")
+
+st.write("1. Click the button to get the login URL here itself.")
+if st.button("Get login URL"):
+    from kiteconnect import KiteConnect
+    API_KEY = os.getenv("ZERODHA_API_KEY")  # recommended
+    kite = KiteConnect(api_key=API_KEY)
+    login_url = kite.login_url()
+    st.success("Login URL generated:")
+    st.write(login_url)
+    st.write("After logging in, copy the `request_token` parameter from the redirected URL.")
+
+request_token = st.text_input("Paste request_token here:")
+
+if st.button("Generate access token"):
+    if not request_token:
+        st.warning("Please enter a request_token first.")
+    else:
+        from kiteconnect import KiteConnect
+        API_KEY = os.getenv("ZERODHA_API_KEY")
+        API_SECRET = os.getenv("ZERODHA_API_SECRET")
+        kite = KiteConnect(api_key=API_KEY)
+        try:
+            data = kite.generate_session(request_token, api_secret=API_SECRET)
+            access_token = data["access_token"]
+            with open("access_token.txt", "w") as f:
+                f.write(access_token)
+            st.success("Access Token generated and saved to access_token.txt")
+            st.write(f"Token (first 10 chars): {access_token[:10]}...")
+        except Exception as e:
+            st.error(f"Error generating session: {e}")
