@@ -23,8 +23,8 @@ def get_daily_access_token():
     try:
         data = kite.generate_session(request_token, api_secret=API_SECRET)
         access_token = data["access_token"]
-        with open("access_token.txt", "w") as f:
-            f.write(access_token)
+        # with open("access_token.txt", "w") as f:
+        #  f.write(access_token)
         print("✅ SUCCESS! Access Token saved to 'access_token.txt'")
         print(f"Token: {access_token}... (hidden)")
     except Exception as e:
