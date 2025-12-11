@@ -26,7 +26,7 @@ def get_daily_access_token():
         with open("access_token.txt", "w") as f:
             f.write(access_token)
         print("✅ SUCCESS! Access Token saved to 'access_token.txt'")
-        print(f"Token: {access_token[:10]}... (hidden)")
+        print(f"Token: {access_token}... (hidden)")
     except Exception as e:
         print("❌ Error generating session:", e)
 
